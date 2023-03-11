@@ -5,4 +5,9 @@ const showAllTeams = async () => {
   return result;
 };
 
+export const showTeamById = async (id: string) => {
+  const result = await teamsModel.findByPk(id);
+  return result;
+};
+
 export default showAllTeams;

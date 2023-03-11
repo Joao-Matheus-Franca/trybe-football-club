@@ -1,5 +1,5 @@
 import * as express from 'express';
-import sendAllTeams from './database/controllers/teamsController';
+import sendAllTeams, { sendOneTeam } from './database/controllers/teamsController';
 
 class App {
   public app: express.Express;
@@ -12,6 +12,7 @@ class App {
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.get('/teams', sendAllTeams);
+    this.app.get('/teams/:id', sendOneTeam);
   }
 
   private config():void {

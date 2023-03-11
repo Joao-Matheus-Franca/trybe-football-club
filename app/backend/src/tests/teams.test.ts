@@ -20,18 +20,26 @@ const mockBahia: teamsModel = new teamsModel({
 describe('Testes de integração da API Trybe Futebol Club', () => {
   let chaiHttpResponse: Response;
 
-  beforeEach(async () => {
-    sinon
-      .stub(teamsModel, "findAll")
-      .resolves([mockBahia]);
-  });
-
   afterEach(()=>{
-    (teamsModel.findAll as sinon.SinonStub).restore();
+    sinon.restore();
   })
 
   it('Testando GET na rota "/teams"', async () => {
+    sinon
+      .stub(teamsModel, "findAll")
+      .resolves([mockBahia]);
+
     const chaiHttpResponse = await chai.request(app).get('/teams');
+
+    expect(chaiHttpResponse.status).to.be.equal(200);
+  })
+
+  it('Testando GET na rota "/teams:id"', async () => {
+    sinon
+      .stub(teamsModel, "findByPk")
+      .resolves(mockBahia);
+
+    const chaiHttpResponse = await chai.request(app).get('/teams/1');
 
     expect(chaiHttpResponse.status).to.be.equal(200);
   })

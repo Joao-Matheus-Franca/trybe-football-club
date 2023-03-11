@@ -1,5 +1,5 @@
 import * as express from 'express';
-import sendAllTeams, { sendOneTeam } from './database/controllers/teamsController';
+import { sendAllTeams, sendOneTeam } from './database/controllers/teamsController';
 
 class App {
   public app: express.Express;

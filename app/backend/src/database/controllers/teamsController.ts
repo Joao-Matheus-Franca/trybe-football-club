@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import teamsService, { showTeamById } from '../services/teamsService';
+import { showAllTeams, showTeamById } from '../services/teamsService';
 
-const sendAllTeams = async (_req: Request, res: Response) => {
-  const result = await teamsService();
+export const sendAllTeams = async (_req: Request, res: Response) => {
+  const result = await showAllTeams();
 
   return res.status(200).json(result);
 };
@@ -13,5 +13,3 @@ export const sendOneTeam = async (req: Request, res: Response) => {
 
   return res.status(200).json(result);
 };
-
-export default sendAllTeams;

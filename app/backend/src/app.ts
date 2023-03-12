@@ -1,5 +1,6 @@
 import * as express from 'express';
 import { sendAllTeams, sendOneTeam } from './database/controllers/teamsController';
+import login from './database/controllers/usersController';
 
 class App {
   public app: express.Express;
@@ -13,6 +14,7 @@ class App {
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.get('/teams', sendAllTeams);
     this.app.get('/teams/:id', sendOneTeam);
+    this.app.post('/login', login);
   }
 
   private config():void {

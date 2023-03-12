@@ -16,4 +16,10 @@ const login = async (req: Request, res: Response) => {
   return res.status(200).json({ token: validate.token });
 };
 
+export const userRole = (req: Request, res: Response) => {
+  const { post } = res.locals;
+
+  return res.status(200).json({ role: post.data.role });
+};
+
 export default login;

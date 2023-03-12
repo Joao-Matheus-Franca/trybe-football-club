@@ -34,7 +34,7 @@ const validateLogin = async (usersInfo: { email: string, password: string }) => 
     return { type: 2, message: 'Invalid email or password' };
   }
 
-  const token = sign({ data: { email } }, secretKey, jwtConfig);
+  const token = sign({ data: { email, role: user?.role } }, secretKey, jwtConfig);
   return { type: 3, token };
 };
 

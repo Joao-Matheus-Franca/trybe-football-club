@@ -16,7 +16,7 @@ const mockUser: usersModel = new usersModel({
   username: 'Admin',
   role: 'admin',
   email: 'admin@admin.com',
-  password: 'secret_admin',
+  password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW',
 });
 
 describe('Testes de integração da API Trybe Futebol Clube', () => {
@@ -25,7 +25,7 @@ describe('Testes de integração da API Trybe Futebol Clube', () => {
   afterEach(() => {sinon.restore()})
 
   it('Testando POST na rota "/login"', async () => {
-    sinon.stub(usersModel, 'findAll').resolves()
+    sinon.stub(usersModel, 'findAll').resolves([mockUser])
 
     const chaiHttpResponse = await chai
       .request(app).post('/login')

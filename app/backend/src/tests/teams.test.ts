@@ -17,7 +17,7 @@ const mockBahia: teamsModel = new teamsModel({
   teamName: 'Bahia'
 });
 
-describe('Testes de integração da API Trybe Futebol Club', () => {
+describe('Testes de integração da API Trybe Futebol Clube', () => {
   let chaiHttpResponse: Response;
 
   afterEach(()=>{

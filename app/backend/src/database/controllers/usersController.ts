@@ -9,6 +9,10 @@ const login = async (req: Request, res: Response) => {
     return res.status(400).json({ message: validate.message });
   }
 
+  if (validate.type === 2) {
+    return res.status(401).json({ message: validate.message });
+  }
+
   return res.status(200).json({ token: validate.token });
 };
 

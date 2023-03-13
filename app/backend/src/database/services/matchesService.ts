@@ -16,4 +16,11 @@ export const updateMatchScore = async (id: number, htg: number, atg: number) => 
   await matchesModel.update({ homeTeamGoals: htg, awayTeamGoals: atg }, { where: { id } });
 };
 
+export const createMatch = async (matchData: { homeTeamId: number, awayTeamId: number,
+  homeTeamGoals: number,
+  awayTeamGoals: number }) => {
+  const created = await matchesModel.create({ ...matchData, inProgress: true });
+  return created;
+};
+
 export default showAllMatches;

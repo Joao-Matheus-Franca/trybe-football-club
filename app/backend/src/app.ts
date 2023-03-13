@@ -1,7 +1,11 @@
 import * as express from 'express';
-import { filterMatches, finishMatch, updateMatch } from './database/controllers/matchesController';
+import { filterMatches,
+  finishMatch,
+  newMatch,
+  updateMatch } from './database/controllers/matchesController';
 import { sendAllTeams, sendOneTeam } from './database/controllers/teamsController';
 import login, { userRole } from './database/controllers/usersController';
+import validateNewMatch from './database/middlewares/validateNewMatch';
 import validateToken from './database/middlewares/validateToken';
 
 class App {
@@ -21,6 +25,7 @@ class App {
     this.app.get('/matches', filterMatches);
     this.app.patch('/matches/:id/finish', validateToken, finishMatch);
     this.app.patch('/matches/:id', validateToken, updateMatch);
+    this.app.post('/matches', validateToken, validateNewMatch, newMatch);
   }
 
   private config():void {

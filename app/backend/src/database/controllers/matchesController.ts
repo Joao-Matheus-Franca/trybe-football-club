@@ -1,5 +1,8 @@
 import { Request, Response } from 'express';
-import showAllMatches, { updateMatchScore, updateMatchStatus } from '../services/matchesService';
+import showAllMatches,
+{ createMatch,
+  updateMatchScore,
+  updateMatchStatus } from '../services/matchesService';
 
 const sendAllMatches = async (_req: Request, res: Response) => {
   const result = await showAllMatches();
@@ -35,6 +38,13 @@ export const updateMatch = async (req: Request, res: Response) => {
   const { body: { homeTeamGoals, awayTeamGoals } } = req;
   await updateMatchScore(Number(id), Number(homeTeamGoals), Number(awayTeamGoals));
   return res.status(200).json({ message: 'Updated match' });
+};
+
+export const newMatch = async (req: Request, res: Response) => {
+  const { body } = req;
+  const data = await createMatch(body);
+
+  return res.status(201).json(data);
 };
 
 export default sendAllMatches;

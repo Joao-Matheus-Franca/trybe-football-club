@@ -8,4 +8,8 @@ const showAllMatches = async () => {
   return matches;
 };
 
+export const updateMatcheStatus = async (id: number) => {
+  await matchesModel.update({ inProgress: false }, { where: { id } });
+};
+
 export default showAllMatches;

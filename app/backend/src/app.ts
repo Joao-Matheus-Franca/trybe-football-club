@@ -1,4 +1,5 @@
 import * as express from 'express';
+import showHomeLeaderboard from './database/controllers/leaderboardService';
 import { filterMatches,
   finishMatch,
   newMatch,
@@ -26,6 +27,7 @@ class App {
     this.app.patch('/matches/:id/finish', validateToken, finishMatch);
     this.app.patch('/matches/:id', validateToken, updateMatch);
     this.app.post('/matches', validateToken, validateNewMatch, newMatch);
+    this.app.get('/leaderboard/home', showHomeLeaderboard);
   }
 
   private config():void {

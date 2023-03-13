@@ -1,4 +1,5 @@
 import * as express from 'express';
+import sendAllMatches from './database/controllers/matchesController';
 import { sendAllTeams, sendOneTeam } from './database/controllers/teamsController';
 import login, { userRole } from './database/controllers/usersController';
 import validateToken from './database/middlewares/validateToken';
@@ -17,6 +18,7 @@ class App {
     this.app.get('/teams/:id', sendOneTeam);
     this.app.post('/login', login);
     this.app.get('/login/role', validateToken, userRole);
+    this.app.get('/matches', sendAllMatches);
   }
 
   private config():void {

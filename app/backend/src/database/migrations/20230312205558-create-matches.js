@@ -16,6 +16,7 @@ module.exports = {
           model: 'teams',
           key: 'id',
         },
+        field: 'home_team_id'
       },
       home_team_goals: {
         allowNull: false,
@@ -27,7 +28,8 @@ module.exports = {
         references: {
           model: 'teams',
           key: 'id',
-      },
+        },
+        field: 'away_team_id'
       },
       away_team_goals: {
         allowNull: false,

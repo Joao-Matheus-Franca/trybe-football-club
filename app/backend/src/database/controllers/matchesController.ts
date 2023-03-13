@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import showAllMatches, { updateMatcheStatus } from '../services/matchesService';
+import showAllMatches, { updateMatchScore, updateMatchStatus } from '../services/matchesService';
 
 const sendAllMatches = async (_req: Request, res: Response) => {
   const result = await showAllMatches();
@@ -26,8 +26,15 @@ export const filterMatches = async (req: Request, res: Response) => {
 
 export const finishMatch = async (req: Request, res: Response) => {
   const { params: { id } } = req;
-  await updateMatcheStatus(Number(id));
+  await updateMatchStatus(Number(id));
   res.status(200).json({ message: 'Finished' });
+};
+
+export const updateMatch = async (req: Request, res: Response) => {
+  const { params: { id } } = req;
+  const { body: { homeTeamGoals, awayTeamGoals } } = req;
+  await updateMatchScore(Number(id), Number(homeTeamGoals), Number(awayTeamGoals));
+  return res.status(200).json({ message: 'Updated match' });
 };
 
 export default sendAllMatches;

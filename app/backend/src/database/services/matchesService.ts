@@ -8,8 +8,12 @@ const showAllMatches = async () => {
   return matches;
 };
 
-export const updateMatcheStatus = async (id: number) => {
+export const updateMatchStatus = async (id: number) => {
   await matchesModel.update({ inProgress: false }, { where: { id } });
+};
+
+export const updateMatchScore = async (id: number, htg: number, atg: number) => {
+  await matchesModel.update({ homeTeamGoals: htg, awayTeamGoals: atg }, { where: { id } });
 };
 
 export default showAllMatches;

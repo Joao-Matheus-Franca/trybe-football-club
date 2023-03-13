@@ -4,11 +4,6 @@ import showAllMatches,
   updateMatchScore,
   updateMatchStatus } from '../services/matchesService';
 
-const sendAllMatches = async (_req: Request, res: Response) => {
-  const result = await showAllMatches();
-  return res.status(200).json(result);
-};
-
 export const filterMatches = async (req: Request, res: Response) => {
   const { query: { inProgress } } = req;
   const result = await showAllMatches();
@@ -46,5 +41,3 @@ export const newMatch = async (req: Request, res: Response) => {
 
   return res.status(201).json(data);
 };
-
-export default sendAllMatches;

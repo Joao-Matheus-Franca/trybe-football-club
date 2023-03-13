@@ -1,5 +1,6 @@
 import * as sinon from 'sinon';
 import * as chai from 'chai';
+import * as jwt from 'jsonwebtoken';
 // @ts-ignore
 import chaiHttp = require('chai-http');
 
@@ -32,5 +33,25 @@ describe('Testes de integração da API Trybe Futebol Clube', () => {
       .send({ email: 'admin@admin.com' , password: 'secret_admin' })
 
     expect(typeof chaiHttpResponse.body.token).to.be.equal('string')
+  })
+
+  it('Testando POST na rota "/login"', async () => {
+    sinon.stub(usersModel, 'findAll').resolves([mockUser])
+
+    const chaiHttpResponse = await chai
+      .request(app).post('/login')
+      .send({ email: '@admin.com' , password: 'secret_admin' })
+
+    expect(chaiHttpResponse.status).to.be.equal(401)
+  })
+
+  it('Testando POST na rota "/login"', async () => {
+    sinon.stub(usersModel, 'findAll').resolves([mockUser])
+
+    const chaiHttpResponse = await chai
+      .request(app).post('/login')
+      .send({ email: '' , password: 'secret_admin' })
+
+    expect(chaiHttpResponse.status).to.be.equal(400)
   })
 })
